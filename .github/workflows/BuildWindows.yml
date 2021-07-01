@@ -25,5 +25,5 @@ jobs:
         working-directory: build
         run: |
           cmake ..
-          cmake --build .
+          cmake --build . --config Release
           ctest -VV
