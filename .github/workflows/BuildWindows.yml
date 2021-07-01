@@ -26,4 +26,4 @@ jobs:
         run: |
           cmake ..
           cmake --build . --config Release
-          ctest -VV --config Release
+          ctest -VV -C Release
