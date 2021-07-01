@@ -1,0 +1,29 @@
+---
+name: Build Windows
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup build environment
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Create build directory
+        shell: bash
+        run: |
+          mkdir build
+
+      - name: Build & Test
+        shell: bash
+        working-directory: build
+        run: |
+          cmake ..
+          cmake --build .
+          ctest -VV
