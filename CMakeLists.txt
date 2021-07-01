@@ -46,5 +46,5 @@ file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/oracle.txt "Hello Action!\n")
 
 # Test
 add_test(NAME CheckOutput
-    COMMAND bash -c "./hello > output.txt && diff oracle.txt output.txt"
+    COMMAND bash -c "$<TARGET_FILE:hello> > output.txt && diff oracle.txt output.txt"
 )
