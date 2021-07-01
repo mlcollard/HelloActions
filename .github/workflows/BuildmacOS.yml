@@ -1,0 +1,32 @@
+---
+name: Build
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup build environment
+        shell: bash
+        run: |
+          brew install ninja
+          echo "CMAKE_GENERATOR=Ninja" >> $GITHUB_ENV
+
+      - name: Create build directory
+        shell: bash
+        run: |
+          mkdir build
+
+      - name: Build & Test
+        shell: bash
+        working-directory: build
+        run: |
+          cmake ..
+          cmake --build .
+          ctest -VV
